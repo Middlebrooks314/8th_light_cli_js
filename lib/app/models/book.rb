@@ -4,6 +4,7 @@ class Book < ActiveRecord::Base
 
 
 
+
 end 
 
 #BOOKS_API_KEY is an environment variable.. to access it 
