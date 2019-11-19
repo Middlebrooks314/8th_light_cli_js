@@ -1,31 +1,54 @@
+
+
 class CommandLineInterface 
     
     def run 
         self.welcome
-        # self.login
-        book_query = get_book_query_from_user
-        book_hash = get_books_from_api(book_query)
-        display_books(book_hash)
     end 
 
     def welcome 
         puts "-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-"
-        puts "Welcome to BookShelf! Happy Reading!"
+        puts ascii.asciify("Welcome to BookShelf!")
         puts "-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-"
-        # self.login
+        self.login
     end 
 
-    # def login 
-    #     puts "Please enter your username"
-    #     username = gets.chomp
-    #     @user = User.find_or_create_by(username: username)
-    #     self.printing 
-    # end 
+    def login 
+        puts "Please enter your username"
+        username = gets.chomp
+        @user = User.find_or_create_by(username: username)
+        sleep(1)
+        puts `clear`
+        self.personal_welcome 
+    end 
 
-    # def printing 
-    #     puts "--------------Hello there #{@user.username}--------------"
-        
-    # end 
+    def personal_welcome
+        puts ascii.asciify("Hello #{@user.username}")
+        self.menu_run
+    end 
+
+    def main_menu
+        puts "--------Main Menu---------"
+        prompt.select("Please select an option", ["Search for books", "View your bookshelf", "Logout"])
+    end 
+    
+    def menu_run
+        menu_choice = self.main_menu
+        case menu_choice
+        when "Search for books"
+            self.get_book_query_from_user
+        when "View your bookshelf"
+            p "------at that list you havent made yet"
+        when "Logout"
+            self.goodbye
+        end 
+    end 
+
+    def goodbye
+        puts `clear`
+        puts ascii.asciify("See you soon")
+        puts ascii.asciify("Happy Reading!!")
+    end 
 
     def get_book_query_from_user
         puts "---------Please enter a keyword to search for books ---------"
@@ -36,5 +59,15 @@ class CommandLineInterface
         book_hash.each.with_index(1) do |data, index|
           puts "#{index}. " + data['title']
         end
-      end
+    end
+
+    def prompt
+        TTY::Prompt.new
+    end 
+
+    def ascii
+        Artii::Base.new
+    end
+
+    
 end 
