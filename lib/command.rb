@@ -52,7 +52,8 @@ class CommandLineInterface
 
     def get_book_query_from_user
         puts "---------Please enter a keyword to search for books ---------"
-        gets.chomp
+        book_query = gets.chomp
+        get_books_from_api(book_query)
     end 
 
     def display_books(book_hash)
