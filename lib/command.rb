@@ -5,8 +5,9 @@ class CommandLineInterface
     def run 
         self.welcome
     end 
-
+    
     def welcome 
+        puts `clear`
         puts "-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-"
         puts ascii.asciify("Welcome to BookShelf!")
         puts "-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-"
@@ -16,14 +17,21 @@ class CommandLineInterface
     def login 
         puts "Please enter your username"
         username = gets.chomp
-        @user = User.find_or_create_by(username: username)
-        sleep(1)
-        puts `clear`
-        self.personal_welcome 
+        if (username == "")
+            p "🤔 Sorry didnt catch that"
+            self.login
+        else 
+            @user = User.find_or_create_by(username: username)
+            @current_user = @user.username
+            sleep(1)
+            puts `clear`
+            self.personal_welcome 
+        end 
     end 
 
     def personal_welcome
         puts ascii.asciify("Hello #{@user.username}")
+        # p @current_user
         self.menu_run
     end 
 
@@ -53,7 +61,14 @@ class CommandLineInterface
     def get_book_query_from_user
         puts "---------Please enter a keyword to search for books ---------"
         book_query = gets.chomp
-        get_books_from_api(book_query)
+        if (book_query == "")
+            p "🤔 Sorry didnt catch that"
+            self.get_book_query_from_user
+        else 
+            p "Searching...."
+            sleep(1)
+            get_books_from_api(book_query)
+        end 
     end 
 
     def display_books(book_hash)
