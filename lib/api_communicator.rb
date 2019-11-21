@@ -16,9 +16,10 @@ def get_books_from_api(book_query)
     
 end 
 
-# iterates through the nested hash to return the first 5 books with the title, author, and publisher attributes 
+# iterates through the nested hash to return the first 5 books with the title, author, 
+# and publisher attributes 
 def parse_query_books(response_hash)
-   
+    
     books = response_hash["items"].map { |item| 
         {
             :title => item.dig("volumeInfo", "title") || "",
@@ -34,32 +35,3 @@ end
 
 
 
-
-#{index + 1}. 
-
-
-# byebug
-    # p books.each do {|book| puts book[:title]}
-    # end 
-
-
-
-
-# books = response_hash["items"].map { |item| 
-#     {
-#         :title => item.dig("volumeInfo", "title") || "",
-#         :publisher => item.dig("volumeInfo", "publisher") || "",
-#         :authors => item.dig("volumeInfo", "authors") || []
-#     }
-# }
-
-# books = response_hash["items"].map { |item| 
-#     [
-#         item.dig("volumeInfo", "title"),
-#         item.dig("volumeInfo", "publisher"),
-#         item.dig("volumeInfo", "authors")
-#     ]
-# }
-# books.each.with_index(1) do |data, index|
-#     puts "#{index} " + data['title']
-#   end
