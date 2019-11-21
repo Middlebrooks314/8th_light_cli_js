@@ -7,7 +7,3 @@ class Book < ActiveRecord::Base
 
 end 
 
-#BOOKS_API_KEY is an environment variable.. to access it 
-
-# API_KEY = ENV["BOOKS_API_KEY"]
-#export BOOKS_API_KEY="obtain from google books API key" inside the terminal

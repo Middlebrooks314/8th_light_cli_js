@@ -3,3 +3,5 @@ class List < ActiveRecord::Base
     belongs_to :book
 
 end 
+
+# belongs to user, has many books
