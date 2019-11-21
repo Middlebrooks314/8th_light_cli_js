@@ -86,6 +86,7 @@ class CommandLineInterface
         puts self.logo_banner
        @user.books.map {|book| p book["book"]}
         end_prompt = prompt.select("",["------ 📚 Add More Books 📚 ------", "------ 🔙 Return to Main Menu ------"])
+        
         if end_prompt == ("------ 📚 Add More Books 📚 ------")
             self.get_book_query_from_user
         else
@@ -104,8 +105,16 @@ class CommandLineInterface
         else
         Book.find_or_create_by(book: book_selection, user_id: @user.id)
         end 
+        self.book_added
+        sleep(2)
+        puts `clear`
       self.bookshelf
     end 
+
+    def book_added
+        puts ascii.asciify("Book Added 👍👍👍👍👍👍👍👍👍")
+    end 
+
 
     def prompt
         TTY::Prompt.new
@@ -114,6 +123,8 @@ class CommandLineInterface
     def ascii
         Artii::Base.new
     end
+
+
 
     
 end 
