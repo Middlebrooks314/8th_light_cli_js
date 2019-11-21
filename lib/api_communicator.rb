@@ -23,8 +23,8 @@ def parse_query_books(response_hash)
     books = response_hash["items"].map { |item| 
         {
             :title => item.dig("volumeInfo", "title") || "",
-            :authors => item.dig("volumeInfo", "authors") || [],
-            :publisher => item.dig("volumeInfo", "publisher") || ""
+            :authors => item.dig("volumeInfo", "authors") || ["unavailable"],
+            :publisher => item.dig("volumeInfo", "publisher") || "unavailable"
         }
     }
     # byebug
@@ -36,13 +36,16 @@ end
 
 def show_query_books(query_return)
     # byebug
-    books = query_return.each_with_index.map do |book, index| "#{index + 1}. \"#{book[:title]}\" by #{book[:authors][0]}, published by #{book[:publisher]} "
+    books = query_return.each_with_index.map do |book, index| "\"#{book[:title]}\" by #{book[:authors][0]}, published by #{book[:publisher]}"
     end 
-    prompt.select("Please select a book to add to your reading list", books)
+    user_book_selection = prompt.select("Please select a book to add to your reading list", books)
+    p user_book_selection.to_str
+    p @user.id
     
 
 end 
 
+#{index + 1}. 
 
 
 # byebug

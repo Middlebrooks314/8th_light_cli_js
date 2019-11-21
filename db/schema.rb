@@ -13,14 +13,8 @@
 ActiveRecord::Schema.define(version: 3) do
 
   create_table "books", force: :cascade do |t|
-    t.string "title"
-    t.string "author"
-    t.integer "publisher"
-  end
-
-  create_table "lists", force: :cascade do |t|
+    t.string "book"
     t.integer "user_id"
-    t.integer "book_id"
   end
 
   create_table "users", force: :cascade do |t|
