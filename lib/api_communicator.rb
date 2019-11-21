@@ -5,21 +5,20 @@ require 'pry'
 
 BASE_URL = 'https://www.googleapis.com/books/v1/volumes?q='
 
-
+# sends GET request to API and parses the JSON
 def get_books_from_api(book_query)
-    p '---------------- getting some bookkkssss------------'
-    # p book_query
     response_string = RestClient.get("#{BASE_URL}#{book_query}&key#{ENV["BOOKS_API_KEY"]}")
-    # p response_string
+   
     response_hash = JSON.parse(response_string)
+    
     parse_query_books(response_hash)
 
     
 end 
 
-
+# iterates through the nested hash to return the first 5 books with the title, author, and publisher attributes 
 def parse_query_books(response_hash)
-    # byebug
+   
     books = response_hash["items"].map { |item| 
         {
             :title => item.dig("volumeInfo", "title") || "",
@@ -34,16 +33,7 @@ def parse_query_books(response_hash)
 end 
 
 
-def show_query_books(query_return)
-    # byebug
-    books = query_return.each_with_index.map do |book, index| "\"#{book[:title]}\" by #{book[:authors][0]}, published by #{book[:publisher]}"
-    end 
-    user_book_selection = prompt.select("Please select a book to add to your reading list", books)
-    p user_book_selection.to_str
-    p @user.id
-    
 
-end 
 
 #{index + 1}. 
 

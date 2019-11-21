@@ -29,6 +29,10 @@ class CommandLineInterface
         end 
     end 
 
+    def logo_banner
+        puts ascii.asciify("BookShelf")
+    end 
+
     def personal_welcome
         puts ascii.asciify("Hello #{@user.username}")
         # p @current_user
@@ -36,8 +40,10 @@ class CommandLineInterface
     end 
 
     def main_menu
+        puts `clear`
+        puts self.logo_banner
         puts "--------Main Menu---------"
-        prompt.select("Please select an option", ["Search for books", "View your bookshelf", "Logout"])
+        prompt.select("Please select an option", ["Search for books", "View your bookshelf", "Logout", "Exit"])
     end 
     
     def menu_run
@@ -46,8 +52,10 @@ class CommandLineInterface
         when "Search for books"
             self.get_book_query_from_user
         when "View your bookshelf"
-            p "------at that list you havent made yet"
+            self.bookshelf
         when "Logout"
+            self.login
+        when "Exit"
             self.goodbye
         end 
     end 
@@ -59,6 +67,8 @@ class CommandLineInterface
     end 
 
     def get_book_query_from_user
+        puts `clear`
+        puts self.logo_banner
         puts "---------Please enter a keyword to search for books ---------"
         book_query = gets.chomp
         if (book_query == "")
@@ -71,11 +81,31 @@ class CommandLineInterface
         end 
     end 
 
-    def display_books(book_hash)
-        book_hash.each.with_index(1) do |data, index|
-          puts "#{index}. " + data['title']
+    def bookshelf
+        puts `clear`
+        puts self.logo_banner
+       @user.books.map {|book| p book["book"]}
+        end_prompt = prompt.select("",["------ 📚 Add More Books 📚 ------", "------ 🔙 Return to Main Menu ------"])
+        if end_prompt == ("------ 📚 Add More Books 📚 ------")
+            self.get_book_query_from_user
+        else
+            self.menu_run 
         end
-    end
+    end 
+
+    def show_query_books(query_return)
+        books = query_return.each_with_index.map do |book, index| "📚 \"#{book[:title]}\", written by #{book[:authors][0]}, & published by #{book[:publisher]}"
+        end 
+        
+        book_selection = prompt.select("Please select a book to add to your reading list", books, "------ 🔙 Return to Main Menu ------")
+        
+        if (book_selection == "------ 🔙 Return to Main Menu ------")
+            self.menu_run
+        else
+        Book.find_or_create_by(book: book_selection, user_id: @user.id)
+        end 
+      self.bookshelf
+    end 
 
     def prompt
         TTY::Prompt.new
