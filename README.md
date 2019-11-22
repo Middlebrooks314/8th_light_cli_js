@@ -5,9 +5,10 @@ Bookshelf is a simple book list application that allows users to search for a to
 ## Installation
 
 1. Bookshelf is a CLI application. You will need to open a command line. 
-
-2. After entering the folder, ```bundle install``` and```ruby bin/run.rb``` in your console to start the application.
-
+2. Obtain a Google Books API key from https://developers.google.com/books/docs/v1/getting_started
+3. In the root directory of this repository, create a `.env` file and add `export BOOKS_API_KEY=<YOUR GOOGLE BOOKS API KEY HERE>`
+4. Run ```bundle install``` in your terminal
+5. Run ```ruby bin/run.rb``` in your terminal to start the application.
 
 
 ## Usage
@@ -17,13 +18,10 @@ Bookshelf is a simple book list application that allows users to search for a to
 2. User can search books 
 3. User can see a list of books returned from the search query
 4. User can add books to their booklist from the returned search query
-7. User can view their booklist
-
+5. User can view their booklist
 
 ```
-
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-Please make sure to update tests as appropriate.
 
