@@ -1,7 +1,7 @@
 # Bookshelf
 
 ![Gif of Bookshelf in action]
-(https://giphy.com/gifs/YOXyuwyQkLahvXO2Yu)
+(https://github.com/Middlebrooks314/8th_light_cli_js/blob/master/bookshelf_in_action.gif)
 
 
 Bookshelf is a simple book list application that allows users to search for a topics to get a list of books that they can subsequently add to their reading list. The Google Books API is used to return the list of books related to the user's search query.
