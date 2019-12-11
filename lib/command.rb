@@ -1,8 +1,8 @@
-class CommandLineInterface 
+class CommandLineInterface
     
-    def run 
+    def run
         self.welcome
-    end 
+    end
     
     def welcome 
         puts `clear`
@@ -10,7 +10,7 @@ class CommandLineInterface
         puts ascii.asciify("Welcome to Bookshelf!")
         puts "-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-"
         self.login
-    end 
+    end
 
     def login 
         puts "Please enter your username"
@@ -23,18 +23,18 @@ class CommandLineInterface
             @current_user = @user.username
             sleep(1)
             puts `clear`
-            self.personal_welcome 
-        end 
-    end 
+            self.personal_welcome
+        end
+    end
 
     def logo_banner
         puts ascii.asciify("Bookshelf")
-    end 
+    end
 
     def personal_welcome
         puts ascii.asciify("Hello #{@user.username}")
         self.menu_run
-    end 
+    end
 
     def main_menu
         puts `clear`
@@ -119,7 +119,7 @@ class CommandLineInterface
             UserBook.find_or_create_by(user_id: @user.id, book_id: @book.id)
             self.book_added   
         end 
-    end 
+    end
 
     def book_added
         puts ascii.asciify("Book Added 👍👍👍👍👍👍👍👍👍")
@@ -134,3 +134,7 @@ class CommandLineInterface
         Artii::Base.new
     end
 end 
+
+# structural testing / unit testing 
+
+# scalability testing 
