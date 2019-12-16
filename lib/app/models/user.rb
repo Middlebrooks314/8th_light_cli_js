@@ -3,14 +3,15 @@ class User < ActiveRecord::Base
   has_many :books, through: :user_books
 
   def self.login_user(username)
-    @user = User.find_or_create_by(username: username)
+    User.find_or_create_by(username: username)
   end
 
-  def self.user_booklist
-    if @user.books.empty?
+  def self.user_booklist(username)
+    user = User.find_by(username: username)
+    if user.books.empty?
       puts 'Your booklist is currently empty. 😩'
     else
-      @user.books.each { |book| puts "📚 '#{book.title}', written by #{book.author}, & published by #{book.publisher}"}
+      user.books.each { |book| puts "📚 '#{book.title}', written by #{book.author}, & published by #{book.publisher}"}
     end
   end
 end
