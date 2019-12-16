@@ -12,12 +12,12 @@ class CommandLine
 
   def login_prompt
     puts 'Please enter your username'
-    @username = gets.chomp
-    if @username == ''
+    username = gets.chomp
+    if username == ''
       puts '🤔 Blank Spaces? Are you a Taylor Swift fan?'
       login_prompt
     else
-      @user = User.login_user(@username)
+      @user = User.login_user(username)
     end
     menu_run
   end
@@ -52,7 +52,6 @@ class CommandLine
 
   def goodbye
     clear_screen
-    puts ascii.asciify('See you soon')
     puts ascii.asciify('Happy Reading!!')
   end
 
@@ -65,7 +64,7 @@ class CommandLine
 
   def booklist
     logo_banner
-    User.user_booklist
+    User.user_booklist(@user.username)
     end_prompt_menu
   end
 
@@ -99,8 +98,8 @@ class CommandLine
   end
 
   def save_user_book(book_obj)
-    @book = Book.find_or_create_by(title: book_obj[:title], author: book_obj[:authors][0], publisher: book_obj[:publisher])
-    UserBook.find_or_create_by(user_id: @user.id, book_id: @book.id)
+    @book = Book.new_book(book_obj)
+    UserBook.add_to_booklist(@user.id, @book.id)
     booklist
   end
 

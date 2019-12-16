@@ -3,7 +3,7 @@ require 'json'
 require 'pry'
 BASE_URL = 'https://www.googleapis.com/books/v1/volumes?q='
 
-def self.user_query_input(book_query)
+def user_query_input(book_query)
   if book_query == ''
     puts '🤔 Sorry didnt catch that'
     sleep(1)
@@ -35,7 +35,7 @@ end
 
 def show_query_books(query_return)
   query_books = query_return.each_with_index.map do |book|
-    "📚 '#{book[:title]}', written by #{book[:authors][0]}, & published by #{book[:publisher]}"
+    "📚 '#{book[:title]}', written by #{book[:authors].join(', ')}, & published by #{book[:publisher]}"
   end
   select_book(query_books, query_return)
 end
