@@ -6,7 +6,9 @@ class CommandLine
 
   def welcome
     clear_screen
-    puts ascii.asciify('Welcome to Bookshelf!')
+    puts '📚🐛📚🐛📚🐛📚🐛📚🐛📚🐛📚🐛📚🐛📚🐛📚🐛📚🐛📚🐛📚🐛📚🐛📚🐛📚🐛📚🐛📚🐛'
+    puts '        Welcome to Bookshelf.... a place to save your reading list.       '
+    puts '📚🐛📚🐛📚🐛📚🐛📚🐛📚🐛📚🐛📚🐛📚🐛📚🐛📚🐛📚🐛📚🐛📚🐛📚🐛📚🐛📚🐛📚🐛'
     login_prompt
   end
 
@@ -24,7 +26,7 @@ class CommandLine
 
   def logo_banner
     clear_screen
-    puts ascii.asciify('Bookshelf')
+    puts '📚🐛 Bookshelf 📚🐛'
   end
 
   def main_menu
@@ -52,7 +54,7 @@ class CommandLine
 
   def goodbye
     clear_screen
-    puts ascii.asciify('Happy Reading!!')
+    puts 'Happy Reading!! 📖 😊'
   end
 
   def book_query_input
@@ -109,9 +111,5 @@ class CommandLine
 
   def prompt
     TTY::Prompt.new
-  end
-
-  def ascii
-    Artii::Base.new
   end
 end

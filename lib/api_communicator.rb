@@ -1,6 +1,7 @@
 require 'rest-client'
 require 'json'
 require 'pry'
+
 BASE_URL = 'https://www.googleapis.com/books/v1/volumes?q='
 
 def user_query_input(book_query)
@@ -33,6 +34,7 @@ def parse_query_books(response_hash)
   show_query_books(query_return)
 end
 
+# prints 5 query books to user
 def show_query_books(query_return)
   query_books = query_return.each_with_index.map do |book|
     "📚 '#{book[:title]}', written by #{book[:authors].join(', ')}, & published by #{book[:publisher]}"
